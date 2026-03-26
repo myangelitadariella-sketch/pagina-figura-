@@ -1,252 +1,916 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELEMENTAL X-SPACE | Escenografías & Eventos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --neon: #39ff14;
-            --dark-bg: #030303;
-            --surface: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.03);
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrintCraft Studio — Impresiones & Figuras Personalizadas</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #fafafa;
+    --pop1: #ff3e6c;
+    --pop2: #00c2ff;
+    --pop3: #ffe600;
+    --pop4: #7b2ff7;
+    --mid: #1a1a2e;
+    --card-bg: #ffffff;
+    --radius: 18px;
+  }
 
-        * { box-sizing: border-box; }
-        body {
-            background-color: var(--dark-bg);
-            color: white;
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* --- BACKGROUND ANIMATION --- */
-        .bg-glow {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #111810 0%, #000 100%);
-            z-index: -1;
-        }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
 
-        /* --- NAVIGATION --- */
-        nav {
-            padding: 30px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            position: sticky; top: 0; z-index: 100;
-        }
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: var(--mid);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 64px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: #fff;
+    letter-spacing: 2px;
+  }
+  .nav-logo span { color: var(--pop1); }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul li a {
+    color: #ccc; text-decoration: none; font-weight: 700;
+    font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav ul li a:hover { color: var(--pop2); }
+  .nav-cta {
+    background: var(--pop1); color: #fff !important;
+    padding: 8px 20px; border-radius: 50px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: #e0003a !important; color: #fff !important; }
 
-        .brand-logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 1.5rem;
-            letter-spacing: -1px;
-            color: #fff;
-            text-decoration: none;
-        }
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--mid);
+    display: flex; align-items: center;
+    padding: 100px 5vw 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(0,194,255,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(255,62,108,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 10%, rgba(123,47,247,0.1) 0%, transparent 50%);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 600px; }
+  .hero-badge {
+    display: inline-block;
+    background: var(--pop3); color: var(--ink);
+    font-weight: 900; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 50px; margin-bottom: 1.5rem;
+    animation: badgePop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+  }
+  @keyframes badgePop {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.95;
+    color: #fff;
+    animation: slideUp 0.7s ease 0.3s both;
+  }
+  .hero h1 .accent { color: var(--pop1); }
+  .hero h1 .accent2 { color: var(--pop2); }
+  .hero p {
+    margin-top: 1.5rem;
+    color: #aab;
+    font-size: 1.1rem; line-height: 1.7;
+    max-width: 480px;
+    animation: slideUp 0.7s ease 0.45s both;
+  }
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin-top: 2.5rem;
+    animation: slideUp 0.7s ease 0.6s both;
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .btn-primary {
+    background: var(--pop1); color: #fff;
+    padding: 14px 32px; border-radius: 50px;
+    font-weight: 900; font-size: 1rem; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(255,62,108,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,62,108,0.5); }
+  .btn-secondary {
+    background: transparent; color: #fff;
+    padding: 14px 32px; border-radius: 50px;
+    font-weight: 900; font-size: 1rem; text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--pop2); color: var(--pop2); }
 
-        .brand-logo span { color: var(--neon); }
+  .hero-shapes {
+    position: absolute; right: 0; top: 0; bottom: 0;
+    width: 50%; display: flex; align-items: center; justify-content: center;
+    pointer-events: none; z-index: 1;
+  }
+  .shape-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    transform: rotate(-8deg);
+    animation: floatGrid 4s ease-in-out infinite alternate;
+  }
+  @keyframes floatGrid {
+    from { transform: rotate(-8deg) translateY(0); }
+    to   { transform: rotate(-8deg) translateY(-20px); }
+  }
+  .shape-item {
+    width: 100px; height: 100px;
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #fff;
+  }
+  .s1 { background: var(--pop1); border-radius: 50%; }
+  .s2 { background: var(--pop2); clip-path: polygon(50% 0%,100% 100%,0% 100%); border-radius: 0; }
+  .s3 { background: var(--pop4); }
+  .s4 { background: var(--pop3); color: var(--ink); clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); border-radius: 0; }
+  .s5 { background: #00e676; border-radius: 50% 0 50% 0; }
+  .s6 { background: #ff9100; clip-path: polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%); border-radius: 0; }
+  .s7 { background: var(--pop2); border-radius: 50%; opacity: 0.5; }
+  .s8 { background: var(--pop1); opacity: 0.4; }
+  .s9 { background: var(--pop4); clip-path: polygon(50% 0%,100% 100%,0% 100%); border-radius: 0; opacity: 0.6; }
 
-        /* --- HERO SECTION --- */
-        header {
-            height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
+  /* ── STATS ── */
+  .stats {
+    background: var(--pop1);
+    padding: 2rem 5vw;
+    display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+  }
+  .stat { text-align: center; color: #fff; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; line-height: 1; }
+  .stat-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; opacity: 0.85; }
 
-        h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(3.5rem, 12vw, 8rem);
-            font-weight: 800;
-            line-height: 0.9;
-            margin: 0;
-            text-transform: uppercase;
-        }
+  /* ── SECTIONS SHARED ── */
+  section { padding: 80px 5vw; }
+  .section-tag {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--pop2); margin-bottom: 0.5rem;
+  }
+  h2.section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1; margin-bottom: 1rem;
+  }
+  .section-sub { color: #666; max-width: 500px; line-height: 1.7; margin-bottom: 3rem; }
 
-        .hero-desc {
-            color: #666;
-            font-size: 1.2rem;
-            margin-top: 30px;
-            max-width: 600px;
-            font-weight: 300;
-        }
+  /* ── SERVICIOS ── */
+  #servicios { background: #f4f4f8; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    transition: transform 0.25s, box-shadow 0.25s;
+    border-top: 4px solid transparent;
+    position: relative; overflow: hidden;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+  .service-card.c1 { border-top-color: var(--pop1); }
+  .service-card.c2 { border-top-color: var(--pop2); }
+  .service-card.c3 { border-top-color: var(--pop4); }
+  .service-card.c4 { border-top-color: #00c853; }
+  .service-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .service-card h3 { font-size: 1.2rem; font-weight: 900; margin-bottom: 0.5rem; }
+  .service-card p { color: #777; font-size: 0.9rem; line-height: 1.6; }
+  .service-materials {
+    margin-top: 1rem;
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .mat-tag {
+    background: #f0f0f5; color: #555;
+    font-size: 0.72rem; font-weight: 700;
+    padding: 3px 10px; border-radius: 50px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
 
-        /* --- INTERACTIVE CATALOG --- */
-        .catalog-container {
-            padding: 100px 5%;
-            max-width: 1400px;
-            margin: auto;
-        }
+  /* ── PROCESO ── */
+  #proceso { background: var(--mid); color: #fff; }
+  #proceso .section-sub { color: #aab; }
+  #proceso h2.section-title { color: #fff; }
+  .steps { display: flex; gap: 0; flex-wrap: wrap; position: relative; }
+  .step {
+    flex: 1; min-width: 180px;
+    padding: 2rem 1.5rem;
+    position: relative;
+    text-align: center;
+  }
+  .step::after {
+    content: '→';
+    position: absolute; right: -10px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem; color: #444;
+  }
+  .step:last-child::after { display: none; }
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem; line-height: 1;
+    color: var(--pop1); opacity: 0.3;
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  }
+  .step-icon { font-size: 2rem; margin-bottom: 0.75rem; position: relative; z-index: 1; margin-top: 1.5rem; }
+  .step h4 { font-weight: 900; margin-bottom: 0.4rem; position: relative; z-index: 1; }
+  .step p { font-size: 0.85rem; color: #889; line-height: 1.5; position: relative; z-index: 1; }
 
-        .filter-bar {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 50px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-        }
+  /* ── COTIZADOR ── */
+  #cotizador { background: #f0f0fa; }
+  .cotizador-wrap {
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 8px 50px rgba(0,0,0,0.1);
+    overflow: hidden;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .cot-header {
+    background: linear-gradient(135deg, var(--mid), #16213e);
+    color: #fff;
+    padding: 2rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .cot-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 2px; }
+  .cot-header p { color: #aab; font-size: 0.9rem; }
+  .cot-body { padding: 2rem 2.5rem; }
 
-        .filter-btn {
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #888;
-            padding: 12px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Syne', sans-serif;
-            font-weight: 600;
-            transition: var(--transition);
-        }
+  /* Form rows */
+  .form-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+    gap: 0.75rem; align-items: end;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 4px; }
+  .form-group label {
+    font-size: 0.75rem; font-weight: 900;
+    text-transform: uppercase; letter-spacing: 1px; color: #888;
+  }
+  .form-group input, .form-group select {
+    padding: 10px 14px;
+    border: 2px solid #e8e8f0;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem; font-weight: 700;
+    background: #fafafa;
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+  }
+  .form-group input:focus, .form-group select:focus { border-color: var(--pop2); background: #fff; }
 
-        .filter-btn:hover, .filter-btn.active {
-            border-color: var(--neon);
-            color: var(--neon);
-            background: rgba(57, 255, 20, 0.05);
-        }
+  .btn-add {
+    background: var(--pop4); color: #fff;
+    border: none; border-radius: 10px;
+    padding: 10px 18px; font-size: 1.3rem;
+    cursor: pointer; font-weight: 900;
+    transition: background 0.2s, transform 0.1s;
+    height: 44px; align-self: flex-end;
+    white-space: nowrap;
+  }
+  .btn-add:hover { background: #6a1de0; transform: scale(1.05); }
 
-        .grid-catalog {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
+  /* Table */
+  .cot-table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    background: #f4f4f8; color: #555;
+    font-size: 0.75rem; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;
+    padding: 10px 14px; text-align: left;
+  }
+  thead th:first-child { border-radius: 8px 0 0 8px; }
+  thead th:last-child { border-radius: 0 8px 8px 0; }
+  tbody tr { border-bottom: 1px solid #f0f0f5; }
+  tbody tr:hover { background: #fafafe; }
+  tbody td { padding: 12px 14px; font-size: 0.9rem; color: #333; }
+  .td-material span {
+    display: inline-block;
+    padding: 3px 10px; border-radius: 50px;
+    font-size: 0.75rem; font-weight: 900; letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .mat-coroplast { background: #e3f5e1; color: #2e7d32; }
+  .mat-trovicel { background: #e3ecff; color: #1a3a8f; }
+  .mat-vinil { background: #fff3e0; color: #e65100; }
+  .mat-lona { background: #fce4ec; color: #ad1457; }
+  .btn-del {
+    background: none; border: none;
+    color: #ccc; cursor: pointer; font-size: 1rem;
+    transition: color 0.2s;
+    padding: 4px 8px;
+  }
+  .btn-del:hover { color: var(--pop1); }
 
-        .project-card {
-            background: var(--surface);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 20px;
-            padding: 40px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
+  /* Totals */
+  .cot-totals {
+    background: #f8f8fc;
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+  }
+  .totals-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .disc-row {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 0; border-top: 1px dashed #ddd;
+  }
+  .disc-row label { font-weight: 900; color: #555; white-space: nowrap; }
+  .disc-input {
+    width: 100px; padding: 8px 12px;
+    border: 2px solid #e0e0f0; border-radius: 8px;
+    font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .disc-input:focus { border-color: var(--pop4); }
+  .total-final {
+    background: var(--mid); color: #fff;
+    border-radius: 12px; padding: 1.2rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .total-final .lbl { font-weight: 700; opacity: 0.7; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+  .total-final .num { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--pop3); letter-spacing: 2px; }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--neon);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
+  /* Client info */
+  .client-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
 
-        .project-card span {
-            font-size: 0.75rem;
-            color: var(--neon);
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+  /* Material prices editor */
+  .prices-toggle {
+    background: none; border: none;
+    color: var(--pop4); font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem; font-weight: 700; cursor: pointer;
+    text-decoration: underline; padding: 0;
+    margin-bottom: 1rem; display: block;
+  }
+  .prices-panel {
+    background: #f8f0ff; border-radius: 12px;
+    padding: 1rem 1.5rem; margin-bottom: 1.5rem;
+    display: none;
+  }
+  .prices-panel.open { display: block; }
+  .prices-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem; margin-top: 0.75rem;
+  }
+  .prices-panel h4 { font-size: 0.85rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; color: var(--pop4); }
 
-        .project-card h3 {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.8rem;
-            margin: 15px 0;
-        }
+  /* Actions */
+  .cot-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin-top: 1.5rem; padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+  }
+  .btn-print {
+    background: var(--pop1); color: #fff;
+    border: none; border-radius: 50px;
+    padding: 12px 28px; font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem; font-weight: 900;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(255,62,108,0.3);
+  }
+  .btn-print:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,62,108,0.4); }
+  .btn-clear {
+    background: transparent; color: #999;
+    border: 2px solid #ddd; border-radius: 50px;
+    padding: 12px 28px; font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem; font-weight: 900; cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-clear:hover { border-color: var(--pop1); color: var(--pop1); }
 
-        .project-card p {
-            color: #777;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
+  .empty-state {
+    text-align: center; padding: 2.5rem 1rem;
+    color: #bbb;
+  }
+  .empty-state .emoji { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+  .empty-state p { font-size: 0.9rem; }
 
-        /* --- CONTACT CTA --- */
-        .cta-section {
-            padding: 150px 20px;
-            text-align: center;
-            background: linear-gradient(to bottom, transparent, #080808);
-        }
+  /* ── CONTACTO ── */
+  #contacto { background: var(--mid); color: #fff; }
+  #contacto h2.section-title { color: #fff; }
+  #contacto .section-sub { color: #aab; }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    align-items: start;
+  }
+  .contact-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    padding: 2rem;
+    transition: background 0.2s;
+  }
+  .contact-card:hover { background: rgba(255,255,255,0.08); }
+  .contact-card .icon { font-size: 2rem; margin-bottom: 1rem; }
+  .contact-card h4 { font-weight: 900; margin-bottom: 0.4rem; }
+  .contact-card p, .contact-card a {
+    color: #aab; font-size: 0.9rem;
+    text-decoration: none; transition: color 0.2s;
+    display: block; margin-top: 0.3rem;
+  }
+  .contact-card a:hover { color: var(--pop2); }
+  .contact-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .wa-btn {
+    display: inline-flex; align-items: center; gap: 0.7rem;
+    background: #25d366; color: #fff;
+    padding: 14px 28px; border-radius: 50px;
+    font-weight: 900; font-size: 1rem; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+    margin-top: 1.5rem;
+  }
+  .wa-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,211,102,0.4); }
 
-        .main-btn {
-            background: var(--neon);
-            color: #000;
-            padding: 25px 60px;
-            font-weight: 800;
-            text-decoration: none;
-            border-radius: 100px;
-            font-family: 'Syne', sans-serif;
-            font-size: 1.3rem;
-            display: inline-block;
-            transition: var(--transition);
-        }
+  /* ── FOOTER ── */
+  footer {
+    background: #0a0a12;
+    color: #555; text-align: center;
+    padding: 2rem 5vw;
+    font-size: 0.85rem;
+  }
+  footer .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; color: #fff; letter-spacing: 2px;
+    display: block; margin-bottom: 0.5rem;
+  }
+  footer .footer-logo span { color: var(--pop1); }
 
-        .main-btn:hover {
-            transform: scale(1.05) rotate(-1deg);
-            box-shadow: 0 0 50px rgba(57, 255, 20, 0.4);
-        }
+  /* ── PRINT ── */
+  @media print {
+    nav, .hero, .stats, #servicios, #proceso, .cot-actions,
+    #contacto, footer, .prices-toggle, .prices-panel,
+    .cot-header p, .btn-add, .btn-del { display: none !important; }
+    body { background: #fff; }
+    #cotizador { padding: 0; background: #fff; }
+    .cotizador-wrap { box-shadow: none; border: 1px solid #ddd; }
+    .cot-totals { background: #f9f9f9; }
+    .total-final { background: #333; }
+  }
 
-        footer {
-            padding: 80px 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            text-align: center;
-            color: #444;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-        }
-    </style>
+  @media (max-width: 768px) {
+    .hero-shapes { display: none; }
+    .form-row { grid-template-columns: 1fr 1fr; }
+    .client-row { grid-template-columns: 1fr; }
+    .totals-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+    .steps { flex-direction: column; }
+    .step::after { content: '↓'; right: auto; top: auto; left: 50%; bottom: -15px; transform: translateX(-50%); }
+  }
+</style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Print<span>Craft</span> Studio</div>
+  <ul>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">¿Cómo funciona?</a></li>
+    <li><a href="#cotizador">Cotizar</a></li>
+    <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav>
 
-    <nav>
-        <a href="#" class="brand-logo">ELEMENTAL<span>X</span></a>
-        <a href="https://www.facebook.com/ventas.ramirez.613360/" target="_blank" style="color: #666; text-decoration: none; font-size: 0.8rem; font-weight: 600;">PORTAL VENTAS</a>
-    </nav>
-
-    <header>
-        <p style="letter-spacing: 8px; font-weight: 300; color: #888;">INDUSTRIAL DESIGN & DECOR</p>
-        <h1>CREANDO <br><span style="color: var(--neon);">ESPACIOS</span></h1>
-        <p class="hero-desc">Transformamos eventos comunes en experiencias inmersivas mediante impresión de gran formato y estructuras rígidas a medida.</p>
-    </header>
-
-    <div class="catalog-container">
-        <div class="filter-bar">
-            <button class="filter-btn active">TODOS</button>
-            <button class="filter-btn">BABY SHOWER</button>
-            <button class="filter-btn">SOCIAL</button>
-            <button class="filter-btn">CORPORATIVO</button>
-        </div>
-
-        <div class="grid-catalog">
-            <div class="project-card">
-                <span>01. Estructuras XL</span>
-                <h3>Figuras Temáticas</h3>
-                <p>Impresión en Trovicel de alta densidad con corte de precisión. Personajes a escala real para ambientaciones infantiles.</p>
-            </div>
-            <div class="project-card">
-                <span>02. Escenografías</span>
-                <h3>Backdrops Mates</h3>
-                <p>Fondos fotográficos en lona de 13oz con acabado mate para evitar reflejos de flash en sesiones profesionales.</p>
-            </div>
-            <div class="project-card">
-                <span>03. Visual Display</span>
-                <h3>Candy Bar Walls</h3>
-                <p>Muros decorativos personalizados y señalética en estireno para mesas de postres exclusivas.</p>
-            </div>
-        </div>
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-content">
+    <div class="hero-badge">✦ Monterrey, NL · Envíos a todo México</div>
+    <h1>
+      Figuras &<br>
+      <span class="accent">Impresiones</span><br>
+      <span class="accent2">Sin límites</span>
+    </h1>
+    <p>Coroplast, trovicel, vinil y lona. Diseños únicos para tu negocio, evento o decoración. Cotiza al instante y recibe tu pedido.</p>
+    <div class="hero-btns">
+      <a href="#cotizador" class="btn-primary">🧮 Cotizar ahora</a>
+      <a href="#servicios" class="btn-secondary">Ver servicios</a>
     </div>
-
-    <div class="cta-section">
-        <h2 style="font-family: 'Syne', sans-serif; font-size: 2.5rem; margin-bottom: 40px;">¿TIENES UNA IDEA? <br> NOSOTROS LA IMPRIMIMOS</h2>
-        <a href="https://www.facebook.com/ventas.ramirez.613360/" target="_blank" class="main-btn">INICIAR COTIZACIÓN</a>
+  </div>
+  <div class="hero-shapes">
+    <div class="shape-grid">
+      <div class="shape-item s1">★</div>
+      <div class="shape-item s2"></div>
+      <div class="shape-item s3">◆</div>
+      <div class="shape-item s4"></div>
+      <div class="shape-item s5">●</div>
+      <div class="shape-item s6"></div>
+      <div class="shape-item s7">○</div>
+      <div class="shape-item s8">■</div>
+      <div class="shape-item s9"></div>
     </div>
+  </div>
+</section>
 
-    <footer>
-        <p>MONTERREY, N.L. // MX</p>
-        <p>© 2026 ELEMENTAL X-SPACE STUDIO</p>
-        <div style="margin-top: 20px;">
-            <a href="https://www.facebook.com/profile.php?id=100063616689215" target="_blank" style="color:#666; margin-right: 15px;">BRAND PORTFOLIO</a>
-            <a href="https://www.facebook.com/ventas.ramirez.613360/" target="_blank" style="color:#666;">DIRECT SALES</a>
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">6.6K</div><div class="stat-label">Seguidores Facebook</div></div>
+  <div class="stat"><div class="stat-num">4</div><div class="stat-label">Materiales disponibles</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Personalizable</div></div>
+  <div class="stat"><div class="stat-num">24h</div><div class="stat-label">Respuesta de cotización</div></div>
+</div>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="section-tag">Lo que hacemos</div>
+  <h2 class="section-title">Nuestros Servicios</h2>
+  <p class="section-sub">Desde figuras decorativas hasta señalización profesional. Si lo puedes imaginar, nosotros lo imprimimos.</p>
+  <div class="services-grid">
+    <div class="service-card c1">
+      <div class="service-icon">🧩</div>
+      <h3>Figuras Decorativas</h3>
+      <p>Recortes con forma personalizada para decorar espacios, eventos, cumpleaños, quince años y más.</p>
+      <div class="service-materials">
+        <span class="mat-tag">Coroplast</span>
+        <span class="mat-tag">Trovicel</span>
+      </div>
+    </div>
+    <div class="service-card c2">
+      <div class="service-icon">🖼️</div>
+      <h3>Impresiones en Gran Formato</h3>
+      <p>Lonas y viniles para publicidad, puntos de venta, stands y fachadas. Alta resolución.</p>
+      <div class="service-materials">
+        <span class="mat-tag">Lona</span>
+        <span class="mat-tag">Vinil</span>
+      </div>
+    </div>
+    <div class="service-card c3">
+      <div class="service-icon">🏠</div>
+      <h3>Decoración de Interiores</h3>
+      <p>Viniles decorativos para paredes, muebles y pisos. Transforma cualquier espacio con tu diseño.</p>
+      <div class="service-materials">
+        <span class="mat-tag">Vinil</span>
+      </div>
+    </div>
+    <div class="service-card c4">
+      <div class="service-icon">📢</div>
+      <h3>Señalización Comercial</h3>
+      <p>Letreros, carteles y señales para negocios. Materiales duraderos para uso en interiores y exteriores.</p>
+      <div class="service-materials">
+        <span class="mat-tag">Trovicel</span>
+        <span class="mat-tag">Coroplast</span>
+        <span class="mat-tag">Lona</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="section-tag" style="color:var(--pop3)">Así de fácil</div>
+  <h2 class="section-title">¿Cómo funciona?</h2>
+  <p class="section-sub">Desde tu idea hasta tu figura en 4 pasos simples.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-icon">🧮</div>
+      <h4>Cotiza en línea</h4>
+      <p>Ingresa tus medidas y material en nuestro cotizador. Sin registro necesario.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-icon">🎨</div>
+      <h4>Envía tu diseño</h4>
+      <p>Mándanos tu arte por WhatsApp o correo. Si no tienes, te ayudamos.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-icon">✅</div>
+      <h4>Aprueba la prueba</h4>
+      <p>Te enviamos una previsualización antes de imprimir. Tú tienes la última palabra.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-icon">🚀</div>
+      <h4>Recibe tu pedido</h4>
+      <p>Envío a todo México o recolección en Monterrey, NL.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COTIZADOR -->
+<section id="cotizador">
+  <div class="section-tag">Calculadora de precios</div>
+  <h2 class="section-title">Cotizador Interactivo</h2>
+  <p class="section-sub">Calcula al instante el costo de tu pedido. Sin sorpresas.</p>
+
+  <div class="cotizador-wrap">
+    <div class="cot-header">
+      <div>
+        <h3>📐 NUEVA COTIZACIÓN</h3>
+        <p>Ingresa tus medidas en centímetros · Precios en MXN</p>
+      </div>
+    </div>
+    <div class="cot-body">
+
+      <!-- Client info -->
+      <div class="client-row">
+        <div class="form-group">
+          <label>👤 Nombre del cliente</label>
+          <input type="text" id="clientName" placeholder="Tu nombre o empresa">
         </div>
-    </footer>
+        <div class="form-group">
+          <label>📋 Proyecto / descripción</label>
+          <input type="text" id="projectName" placeholder="Ej: Decoración cumpleaños">
+        </div>
+      </div>
 
+      <!-- Prices editor -->
+      <button class="prices-toggle" onclick="togglePrices()">⚙️ Editar precios por m² (opcional)</button>
+      <div class="prices-panel" id="pricesPanel">
+        <h4>Precios por m² (MXN)</h4>
+        <div class="prices-grid">
+          <div class="form-group">
+            <label>🟩 Coroplast</label>
+            <input type="number" id="p_coroplast" value="370" min="1">
+          </div>
+          <div class="form-group">
+            <label>🟦 Trovicel</label>
+            <input type="number" id="p_trovicel" value="950" min="1">
+          </div>
+          <div class="form-group">
+            <label>🟧 Vinil</label>
+            <input type="number" id="p_vinil" value="190" min="1">
+          </div>
+          <div class="form-group">
+            <label>🟥 Lona</label>
+            <input type="number" id="p_lona" value="145" min="1">
+          </div>
+        </div>
+      </div>
+
+      <!-- Add item form -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>🎨 Material</label>
+          <select id="itemMaterial">
+            <option value="coroplast">Coroplast</option>
+            <option value="trovicel">Trovicel</option>
+            <option value="vinil">Vinil</option>
+            <option value="lona">Lona</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>📏 Ancho (cm)</label>
+          <input type="number" id="itemW" placeholder="ej: 60" min="1">
+        </div>
+        <div class="form-group">
+          <label>📐 Alto (cm)</label>
+          <input type="number" id="itemH" placeholder="ej: 90" min="1">
+        </div>
+        <div class="form-group">
+          <label>🔢 Cantidad</label>
+          <input type="number" id="itemQty" value="1" min="1">
+        </div>
+        <button class="btn-add" onclick="addItem()">＋</button>
+      </div>
+
+      <!-- Table -->
+      <div class="cot-table-wrap">
+        <table id="cot-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Material</th>
+              <th>Dimensiones</th>
+              <th>m²</th>
+              <th>Precio/m²</th>
+              <th>Cant.</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cot-tbody">
+            <tr id="empty-row">
+              <td colspan="8">
+                <div class="empty-state">
+                  <span class="emoji">📐</span>
+                  <p>Agrega tu primer ítem usando el formulario de arriba</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Totals -->
+      <div class="cot-totals" id="totals-section" style="display:none">
+        <div class="totals-grid" id="material-totals"></div>
+        <div class="disc-row">
+          <label>🏷️ Descuento:</label>
+          <input type="number" class="disc-input" id="discount" value="0" min="0" max="100" oninput="renderTotals()">
+          <span style="font-weight:700; color:#888">%</span>
+        </div>
+        <div class="total-final">
+          <div>
+            <div class="lbl">Total de la cotización</div>
+            <div style="color:#aab; font-size:0.8rem;" id="subtotal-line"></div>
+          </div>
+          <div class="num" id="grand-total">$0</div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="cot-actions">
+        <button class="btn-print" onclick="printCot()">🖨️ Imprimir / Guardar PDF</button>
+        <button class="btn-clear" onclick="clearAll()">🗑️ Limpiar todo</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-tag" style="color:var(--pop2)">Escríbenos</div>
+  <h2 class="section-title">Contáctanos</h2>
+  <p class="section-sub">¿Listo para ordenar o tienes preguntas? Estamos aquí para ayudarte.</p>
+  <div class="contact-grid">
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="icon">📍</div>
+        <h4>Ubicación</h4>
+        <p>Monterrey, Nuevo León, México</p>
+        <p>Envíos a todo el país</p>
+      </div>
+      <div class="contact-card">
+        <div class="icon">📱</div>
+        <h4>Redes Sociales</h4>
+        <a href="https://www.facebook.com/profile.php?id=100063616689215" target="_blank">Facebook: Figuras de Coroplast</a>
+      </div>
+      <div class="contact-card">
+        <div class="icon">🕐</div>
+        <h4>Horario de atención</h4>
+        <p>Lunes a Viernes · 9am – 7pm</p>
+        <p>Sábado · 9am – 2pm</p>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:1.5rem;">
+      <div>
+        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:2rem; margin-bottom:0.5rem;">¿Tienes una idea?</h3>
+        <p style="color:#aab; line-height:1.7;">Cuéntanos qué necesitas. Usamos el cotizador de esta página para darte un precio exacto. Después envíanos tu diseño y arrancamos.</p>
+      </div>
+      <a href="https://wa.me/521XXXXXXXXXX?text=Hola!%20Quiero%20cotizar%20una%20impresión" class="wa-btn" target="_blank">
+        <svg width="22" height="22" viewBox="0 0 32 32" fill="white"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.82.737 5.463 2.027 7.763L0 32l8.527-2.007A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.4 22.8c-.35.98-1.75 1.8-2.87 2.03-.77.16-1.77.29-5.14-1.1-4.31-1.74-7.09-6.09-7.31-6.37-.21-.28-1.75-2.33-1.75-4.45s1.11-3.16 1.54-3.6a1.6 1.6 0 011.17-.54c.29 0 .57.01.82.02.26.01.62-.1.97.74.35.84 1.19 2.9 1.3 3.11.1.21.17.46.03.74-.14.28-.21.45-.41.69-.2.24-.42.53-.6.71-.2.2-.41.41-.17.8.24.39 1.06 1.74 2.27 2.82 1.56 1.39 2.88 1.82 3.28 2.02.4.2.63.17.87-.1.24-.27 1.03-1.2 1.3-1.61.27-.41.54-.34.91-.2.37.14 2.35 1.11 2.75 1.31.4.2.67.3.77.46.1.16.1.93-.24 1.92z"/></svg>
+        Chatear por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Print<span>Craft</span> Studio</span>
+  <p>Figuras & Impresiones Personalizadas · Monterrey, NL</p>
+  <p style="margin-top:0.5rem;">© 2025 PrintCraft Studio · Todos los derechos reservados</p>
+</footer>
+
+<script>
+  const items = [];
+  let idCounter = 1;
+
+  const PRICES = {
+    coroplast: () => +document.getElementById('p_coroplast').value || 370,
+    trovicel:  () => +document.getElementById('p_trovicel').value  || 950,
+    vinil:     () => +document.getElementById('p_vinil').value     || 190,
+    lona:      () => +document.getElementById('p_lona').value      || 145,
+  };
+
+  const MAT_LABELS = { coroplast:'Coroplast', trovicel:'Trovicel', vinil:'Vinil', lona:'Lona' };
+
+  function calcM2(w, h) {
+    const m2 = (w / 100) * (h / 100);
+    return Math.max(1, m2); // mínimo 1 m²
+  }
+
+  function addItem() {
+    const mat = document.getElementById('itemMaterial').value;
+    const w   = parseFloat(document.getElementById('itemW').value);
+    const h   = parseFloat(document.getElementById('itemH').value);
+    const qty = parseInt(document.getElementById('itemQty').value) || 1;
+    if (!w || !h || w <= 0 || h <= 0) { alert('Ingresa ancho y alto válidos.'); return; }
+    const m2 = calcM2(w, h);
+    const ppm2 = PRICES[mat]();
+    const subtotal = m2 * ppm2 * qty;
+    items.push({ id: idCounter++, mat, w, h, m2, ppm2, qty, subtotal });
+    renderTable();
+  }
+
+  function deleteItem(id) {
+    const i = items.findIndex(x => x.id === id);
+    if (i !== -1) items.splice(i, 1);
+    renderTable();
+  }
+
+  function renderTable() {
+    const tbody = document.getElementById('cot-tbody');
+    if (items.length === 0) {
+      tbody.innerHTML = `<tr id="empty-row"><td colspan="8"><div class="empty-state"><span class="emoji">📐</span><p>Agrega tu primer ítem usando el formulario de arriba</p></div></td></tr>`;
+      document.getElementById('totals-section').style.display = 'none';
+      return;
+    }
+    tbody.innerHTML = items.map((it, i) => `
+      <tr>
+        <td style="color:#aaa; font-size:0.8rem;">${i + 1}</td>
+        <td class="td-material"><span class="mat-${it.mat}">${MAT_LABELS[it.mat]}</span></td>
+        <td>${it.w} × ${it.h} cm</td>
+        <td>${it.m2.toFixed(2)} m²</td>
+        <td>$${it.ppm2.toLocaleString('es-MX')}</td>
+        <td>${it.qty}</td>
+        <td style="font-weight:900;">$${it.subtotal.toLocaleString('es-MX', {minimumFractionDigits:2, maximumFractionDigits:2})}</td>
+        <td><button class="btn-del" onclick="deleteItem(${it.id})">✕</button></td>
+      </tr>
+    `).join('');
+    document.getElementById('totals-section').style.display = 'block';
+    renderTotals();
+  }
+
+  function renderTotals() {
+    const byMat = {};
+    items.forEach(it => {
+      if (!byMat[it.mat]) byMat[it.mat] = 0;
+      byMat[it.mat] += it.subtotal;
+    });
+    const matDiv = document.getElementById('material-totals');
+    matDiv.innerHTML = Object.entries(byMat).map(([mat, tot]) => `
+      <div style="background:#f8f8fc; border-radius:10px; padding:1rem;">
+        <div style="font-size:0.75rem; font-weight:900; text-transform:uppercase; letter-spacing:1px; color:#888; margin-bottom:4px;">${MAT_LABELS[mat]}</div>
+        <div style="font-size:1.3rem; font-weight:900;">$${tot.toLocaleString('es-MX', {minimumFractionDigits:2})}</div>
+      </div>
+    `).join('');
+    const subtotal = items.reduce((s, it) => s + it.subtotal, 0);
+    const disc = Math.max(0, Math.min(100, +document.getElementById('discount').value || 0));
+    const total = subtotal * (1 - disc / 100);
+    document.getElementById('subtotal-line').textContent =
+      disc > 0 ? `Subtotal: $${subtotal.toLocaleString('es-MX', {minimumFractionDigits:2})} — Descuento ${disc}%` : '';
+    document.getElementById('grand-total').textContent =
+      '$' + total.toLocaleString('es-MX', {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+
+  function clearAll() {
+    if (!items.length || confirm('¿Limpiar toda la cotización?')) {
+      items.length = 0;
+      document.getElementById('clientName').value = '';
+      document.getElementById('projectName').value = '';
+      document.getElementById('discount').value = 0;
+      renderTable();
+    }
+  }
+
+  function printCot() {
+    window.print();
+  }
+
+  function togglePrices() {
+    document.getElementById('pricesPanel').classList.toggle('open');
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
 </body>
 </html>
