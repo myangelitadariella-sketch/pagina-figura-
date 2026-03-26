@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEMENTAL X-SPACE | Escenografías & Eventos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon: #39ff14;
+            --dark-bg: #030303;
+            --surface: #0a0a0a;
+            --glass: rgba(255, 255, 255, 0.03);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- BACKGROUND ANIMATION --- */
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #111810 0%, #000 100%);
+            z-index: -1;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 30px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 100;
+        }
+
+        .brand-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .brand-logo span { color: var(--neon); }
+
+        /* --- HERO SECTION --- */
+        header {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3.5rem, 12vw, 8rem);
+            font-weight: 800;
+            line-height: 0.9;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .hero-desc {
+            color: #666;
+            font-size: 1.2rem;
+            margin-top: 30px;
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        /* --- INTERACTIVE CATALOG --- */
+        .catalog-container {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 50px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .filter-btn {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #888;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--neon);
+            color: var(--neon);
+            background: rgba(57, 255, 20, 0.05);
+        }
+
+        .grid-catalog {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 40px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .project-card span {
+            font-size: 0.75rem;
+            color: var(--neon);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .project-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            margin: 15px 0;
+        }
+
+        .project-card p {
+            color: #777;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- CONTACT CTA --- */
+        .cta-section {
+            padding: 150px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, transparent, #080808);
+        }
+
+        .main-btn {
+            background: var(--neon);
+            color: #000;
+            padding: 25px 60px;
+            font-weight: 800;
+            text-decoration: none;
+            border-radius: 100px;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .main-btn:hover {
+            transform: scale(1.05) rotate(-1deg);
+            box-shadow: 0 0 50px rgba(57, 255, 20, 0.4);
+        }
+
+        footer {
+            padding: 80px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            color: #444;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <nav>
+        <a href="#" class="brand-logo">ELEMENTAL<span>X</span></a>
+        <a href="https://www.facebook.com/ventas.ramirez.613360/" target="_blank" style="color: #666; text-decoration: none; font-size: 0.8rem; font-weight: 600;">PORTAL VENTAS</a>
+    </nav>
+
+    <header>
+        <p style="letter-spacing: 8px; font-weight: 300; color: #888;">INDUSTRIAL DESIGN & DECOR</p>
+        <h1>CREANDO <br><span style="color: var(--neon);">ESPACIOS</span></h1>
+        <p class="hero-desc">Transformamos eventos comunes en experiencias inmersivas mediante impresión de gran formato y estructuras rígidas a medida.</p>
+    </header>
+
+    <div class="catalog-container">
+        <div class="filter-bar">
+            <button class="filter-btn active">TODOS</button>
+            <button class="filter-btn">BABY SHOWER</button>
+            <button class="filter-btn">SOCIAL</button>
+            <button class="filter-btn">CORPORATIVO</button>
+        </div>
+
+        <div class="grid-catalog">
+            <div class="project-card">
+                <span>01. Estructuras XL</span>
+                <h3>Figuras Temáticas</h3>
+                <p>Impresión en Trovicel de alta densidad con corte de precisión. Personajes a escala real para ambientaciones infantiles.</p>
+            </div>
+            <div class="project-card">
+                <span>02. Escenografías</span>
+                <h3>Backdrops Mates</h3>
+                <p>Fondos fotográficos en lona de 13oz con acabado mate para evitar reflejos de flash en sesiones profesionales.</p>
+            </div>
+            <div class="project-card">
+                <span>03. Visual Display</span>
+                <h3>Candy Bar Walls</h3>
+                <p>Muros decorativos personalizados y señalética en estireno para mesas de postres exclusivas.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <h2 style="font-family: 'Syne', sans-serif; font-size: 2.5rem; margin-bottom: 40px;">¿TIENES UNA IDEA? <br> NOSOTROS LA IMPRIMIMOS</h2>
+        <a href="https://www.facebook.com/ventas.ramirez.613360/" target="_blank" class="main-btn">INICIAR COTIZACIÓN</a>
+    </div>
+
+    <footer>
+        <p>MONTERREY, N.L. // MX</p>
+        <p>© 2026 ELEMENTAL X-SPACE STUDIO</p>
+        <div style="margin-top: 20px;">
+            <a href="https://www.facebook.com/profile.php?id=100063616689215" target="_blank" style="color:#666; margin-right: 15px;">BRAND PORTFOLIO</a>
+            <a href="https://www.facebook.com/ventas.ramirez.613360/" target="_blank" style="color:#666;">DIRECT SALES</a>
+        </div>
+    </footer>
+
+</body>
+</html>
